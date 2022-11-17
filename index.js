@@ -11,23 +11,25 @@ exports.handler = (event) => {
 async function sendVerificationEmail(event) {
   let queryParams = {
     TableName: "csye6225",
+
     Key: {
       id: { S: event.Records[0].Sns.Message },
     },
   };
   const data = await ddb.getItem(queryParams).promise();
-  const token = Object.values(data.Item.token)[0];
+
+  const token = data.Item.token.S;
 
   const params = {
     Destination: {
-      ToAddresses: event.Records[0].Sns.Message,
+      ToAddresses: [event.Records[0].Sns.Message],
     },
     Message: {
       Body: {
         Html: {
           Charset: "UTF-8",
           Data:
-            "https://prod.hackerboard.xyz/v1/verifyEmail?email=" +
+            "http://prod.hackerboard.xyz/v1/verifyEmail?email=" +
             event.Records[0].Sns.Message +
             "&token=" +
             token,
