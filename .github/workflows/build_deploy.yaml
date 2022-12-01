@@ -34,4 +34,4 @@ jobs:
         run: aws s3 cp serverless.zip s3://${{secrets.S3_BUCKET}}
 
       - name: Update code
-        run: aws lambda update-function-code --function-name serverless --s3-bucket ${{secrets.S3_BUCKET}} --s3-key serverless.zip
+        run: aws lambda update-function-code --function-name lambda-function --s3-bucket ${{secrets.S3_BUCKET}} --s3-key serverless.zip
