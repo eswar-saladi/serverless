@@ -29,7 +29,7 @@ async function sendVerificationEmail(event) {
         Html: {
           Charset: "UTF-8",
           Data:
-            "http://prod.hackerboard.xyz/v1/verifyEmail?email=" +
+            "User Verification http://prod.hackerboard.xyz/v1/verifyEmail?email=" +
             event.Records[0].Sns.Message +
             "&token=" +
             token,
